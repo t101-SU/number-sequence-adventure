@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>🚂 數字小火車與積木島：數列大冒險</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ================= 頂部導航列 ================= -->
+  <header class="app-header">
+    <div class="logo-container">
+      <div class="logo-icon">🚂</div>
+      <div class="logo-text">
+        <h1>數字小火車與積木島</h1>
+        <p>國小三年級數學 1-1 數到10000 · 數列進退位視覺探險</p>
+      </div>
+    </div>
+
+    <div class="header-controls">
+      <div class="star-badge" id="star-badge">
+        <span>⭐</span>
+        <span id="star-count-num">0</span>
+      </div>
+      <button class="sound-btn" id="bgm-toggle">
+        🎵 音樂: 停
+      </button>
+      <button class="sound-btn active" id="sound-toggle">
+        🔊 音效: 開
+      </button>
+    </div>
+  </header>
+
+  <!-- ================= 模式切換分頁 ================= -->
+  <nav class="mode-nav">
+    <button class="tab-btn active" data-mode="explorer">
+      <span>🌟</span> 模式一：積木透視鏡（自由探索）
+    </button>
+    <button class="tab-btn" data-mode="quest">
+      <span>🚂</span> 模式二：數列小火車（關卡闖關）
+    </button>
+    <button class="tab-btn" data-mode="magic">
+      <span>🪄</span> 模式三：進退位魔術箱（突破特訓）
+    </button>
+  </nav>
+
+  <!-- ================= 主內容舞台 ================= -->
+  <main class="main-stage">
+
+    <!-- ================= 模式一：積木透視鏡（自由探索島） ================= -->
+    <section class="mode-section active" id="mode-explorer">
+      <!-- 快速課本題目選擇列 -->
+      <div class="explorer-top-bar">
+        <div class="preset-group">
+          <span class="preset-title">📖 課本情境直達：</span>
+          <button class="preset-btn" data-val="3000">🐟 飛魚季 (3000)</button>
+          <button class="preset-btn" data-val="1735">🐼 動物園 (1735)</button>
+          <button class="preset-btn" data-val="4213">🧱 積木卡 (4213)</button>
+          <button class="preset-btn" data-val="7105">🌀 跨零倒數 (7105)</button>
+          <button class="preset-btn" data-val="9000">🚀 衝刺一萬 (9000)</button>
+        </div>
+
+        <div class="number-input-wrap">
+          <button class="action-pill-btn" id="btn-random-num" title="隨機產生一個有趣的四位數">🎲 隨機數</button>
+          <input type="number" id="custom-num-input" class="custom-num-input" min="0" max="10000" value="3000" placeholder="0~10000">
+          <button class="action-pill-btn" id="btn-apply-input">設定數字</button>
+        </div>
+      </div>
+
+      <!-- 當前數字與朗讀按鈕 -->
+      <div class="current-number-display">
+        <div class="big-number-badge" id="big-number-val">3000</div>
+        <button class="speak-btn" id="speak-num-btn" title="聽聽看這個數字怎麼讀！">
+          <span>🔊</span> 聽讀音
+        </button>
+      </div>
+
+      <!-- 萬、千、百、十、個標準五位定位板 -->
+      <div class="place-value-board" id="explorer-pv-board">
+        <!-- 由 blocks.js 動態渲染 -->
+      </div>
+
+      <!-- 十進位積木具象展示台 -->
+      <div class="blocks-stage" id="explorer-blocks-stage">
+        <!-- 由 blocks.js 動態渲染 4 欄立體積木 -->
+      </div>
+
+      <!-- 孩子友善的教學講解說明橫幅 -->
+      <div class="explanation-banner">
+        <div class="mascot-avatar">🐱</div>
+        <div class="explanation-text" id="explorer-explanation-text">
+          歡迎來到積木島！點擊下方綠色按鈕增加積木，或點紅色按鈕拿走積木，看看積木和定位板有什麼神奇的變化！
+        </div>
+      </div>
+
+      <!-- 數列變化增減控制區 -->
+      <div class="step-control-grid">
+        <!-- 千位控制 -->
+        <div class="step-card card-qian">
+          <div class="step-card-title">千位（大金塊 1000）</div>
+          <div class="step-btn-pair">
+            <button class="btn-step add" data-step="1000">＋1000</button>
+            <button class="btn-step sub" data-step="-1000">－1000</button>
+          </div>
+        </div>
+
+        <!-- 百位控制 -->
+        <div class="step-card card-bai">
+          <div class="step-card-title">百位（藍平板 100）</div>
+          <div class="step-btn-pair">
+            <button class="btn-step add" data-step="100">＋100</button>
+            <button class="btn-step sub" data-step="-100">－100</button>
+          </div>
+        </div>
+
+        <!-- 十位控制 -->
+        <div class="step-card card-shi">
+          <div class="step-card-title">十位（粉長條 10）</div>
+          <div class="step-btn-pair">
+            <button class="btn-step add" data-step="10">＋10</button>
+            <button class="btn-step sub" data-step="-10">－10</button>
+          </div>
+        </div>
+
+        <!-- 個位控制 -->
+        <div class="step-card card-ge">
+          <div class="step-card-title">個位（綠小粒 1）</div>
+          <div class="step-btn-pair">
+            <button class="btn-step add" data-step="1">＋1</button>
+            <button class="btn-step sub" data-step="-1">－1</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 數列歷史軌跡線 -->
+      <div class="history-trail-wrap">
+        <span class="trail-title">🛤️ 數列步道：</span>
+        <div id="history-trail-items">
+          <!-- 動態記錄歷史歷程 -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 模式二：數列小火車（關卡闖關） ================= -->
+    <section class="mode-section" id="mode-quest">
+      <!-- 關卡選擇列 -->
+      <div class="quest-top-nav">
+        <div class="level-badges-list" id="level-badges-list">
+          <!-- 由 levels.js 動態渲染 5 個關卡按鈕 -->
+        </div>
+      </div>
+
+      <!-- 火車軌道舞台 -->
+      <div class="train-stage">
+        <div class="train-track"></div>
+        <div class="train-convoy" id="train-convoy">
+          <!-- 由 game.js 動態渲染火車頭與 5 節車廂 -->
+        </div>
+      </div>
+
+      <!-- 💡 積木透視鏡鷹架輔助區 -->
+      <div class="quest-hint-box" id="quest-hint-box">
+        <div class="hint-header">
+          <div class="hint-title">💡 積木透視小幫手</div>
+        </div>
+        <div class="hint-content" id="hint-content">
+          <!-- 動態載入規律提示與位值變化分析 -->
+        </div>
+      </div>
+
+      <!-- 作答控制台 -->
+      <div class="quest-action-console">
+        <div class="question-prompt-banner" id="question-prompt-banner">
+          請找出問號車廂的數字！
+        </div>
+
+        <!-- 4 個大按鈕選項（極適合平板手指點擊） -->
+        <div class="options-grid" id="options-grid">
+          <!-- 由 game.js 動態生成選項 -->
+        </div>
+
+        <!-- 工具列：打開透視鏡與發音 -->
+        <div class="helper-btn-row">
+          <button class="tool-toggle-btn" id="toggle-hint-btn">
+            💡 打開積木透視鏡
+          </button>
+          <button class="tool-toggle-btn" id="quest-speak-btn" title="從第 1 節車廂依序朗讀到最後一節車廂！">
+            🔊 朗讀整列火車數字
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 模式三：進退位魔術箱（突破特訓） ================= -->
+    <section class="mode-section" id="mode-magic">
+      <div class="magic-stage">
+        <div class="preset-title" style="margin-bottom: 4px;">🎯 選擇孩子最容易卡關的進退位魔王題：</div>
+        <!-- 臨界題型選單 -->
+        <div class="magic-cases-selector" id="magic-cases-selector">
+          <!-- 由 levels.js 動態渲染 -->
+        </div>
+
+        <!-- 魔術箱對比舞台 -->
+        <div class="magic-box-arena">
+          <!-- 左：原始數字與積木 -->
+          <div class="magic-box-col">
+            <div class="magic-box-title" id="magic-title-before">原數字：3009</div>
+            <div class="magic-box-number" id="magic-num-before">3009</div>
+            <div id="magic-blocks-before" style="width: 100%;"></div>
+          </div>
+
+          <!-- 中：魔法操作中心 -->
+          <div class="magic-action-center">
+            <button class="magic-wand-btn" id="magic-wand-btn">
+              ✨ 施展十合一魔法！
+            </button>
+            <div style="font-size: 0.9rem; color: #6B46C1; font-weight: 800; text-align: center; max-width: 140px;">
+              點擊魔法杖<br>見證進退位奇蹟！
+            </div>
+          </div>
+
+          <!-- 右：變化後的數字與積木 -->
+          <div class="magic-box-col">
+            <div class="magic-box-title" id="magic-title-after">魔術變化後</div>
+            <div class="magic-box-number" id="magic-num-after">?</div>
+            <div id="magic-blocks-after" style="width: 100%;"></div>
+          </div>
+        </div>
+
+        <!-- 魔術故事解說橫幅 -->
+        <div class="explanation-banner" style="background: #F3E5F5; border-color: #E1BEE7; border-left-color: #8E24AA;">
+          <div class="mascot-avatar">🧙‍♂️</div>
+          <div class="explanation-text" id="magic-story-text" style="color: #4A148C;">
+            原本有 9 粒小積木，加上第 10 粒！滿 10 個個位，點擊魔法杖合體成 1 根十條！
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ================= 過關慶祝彈窗 ================= -->
+  <div class="modal-overlay" id="celebration-modal">
+    <div class="modal-dialog">
+      <div class="modal-icon">🎉</div>
+      <h2 class="modal-title">太棒了！闖關成功！</h2>
+      <p class="modal-body">
+        恭喜你順利找出所有的車廂規律！<br>
+        嘟嘟小火車獲得了滿滿的動力，星星能量 +5！⭐
+      </p>
+      <button class="modal-close-btn" id="modal-close-btn">繼續前進 🚂</button>
+    </div>
+  </div>
+
+  <!-- 引入模組化程式腳本 -->
+  <script src="js/audio.js"></script>
+  <script src="js/blocks.js"></script>
+  <script src="js/levels.js"></script>
+  <script src="js/game.js"></script>
+</body>
+</html>

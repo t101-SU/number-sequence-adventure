@@ -1,0 +1,1620 @@
+/* ==========================================================================
+   🚂 數字小火車與積木島：數列大冒險 - style.css
+   活潑可愛童趣風格、立體十進位積木、火車軌道與高對比定位板樣式
+   ========================================================================== */
+
+:root {
+  --font-family: 'PingFang TC', 'Microsoft JhengHei', '微軟正黑體', 'Comic Sans MS', sans-serif;
+  
+  /* 品牌與背景色彩 */
+  --bg-gradient: linear-gradient(135deg, #FFF9E6 0%, #E8F5E9 50%, #E1F5FE 100%);
+  --panel-bg: rgba(255, 255, 255, 0.95);
+  --text-main: #2D3748;
+  --text-muted: #718096;
+  
+  /* 五位數標準教學色（與國小三年級課本一致） */
+  --color-wan: #9C27B0;   /* 萬位：尊爵紫 */
+  --color-wan-bg: #F3E5F5;
+  --color-qian: #FF9800;  /* 千位：金黃大方塊 */
+  --color-qian-bg: #FFF3E0;
+  --color-bai: #2196F3;   /* 百位：湖水藍平板 */
+  --color-bai-bg: #E1F5FE;
+  --color-shi: #E91E63;   /* 十位：珊瑚粉長條 */
+  --color-shi-bg: #FCE4EC;
+  --color-ge: #4CAF50;    /* 個位：青翠綠小粒 */
+  --color-ge-bg: #E8F5E9;
+  
+  /* 功能色 */
+  --color-train-red: #FF5722;
+  --color-train-gold: #FFC107;
+  --color-success: #10B981;
+  --color-warning: #F59E0B;
+  --color-card-border: #E2E8F0;
+  
+  --shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 8px 16px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 14px 28px rgba(0, 0, 0, 0.12);
+  --shadow-pop: 0 10px 0 #CBD5E0;
+  --border-radius: 20px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+body {
+  font-family: var(--font-family);
+  background: var(--bg-gradient);
+  min-height: 100vh;
+  color: var(--text-main);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-x: hidden;
+}
+
+/* ================= 頂部導航與標題 ================= */
+.app-header {
+  width: 100%;
+  max-width: 1120px;
+  background: var(--panel-bg);
+  backdrop-filter: blur(10px);
+  border-radius: var(--border-radius);
+  padding: 14px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: var(--shadow-md);
+  margin-bottom: 16px;
+  border: 3px solid #FFF;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-icon {
+  font-size: 2.4rem;
+  animation: train-rock 1.5s ease-in-out infinite alternate;
+}
+
+.logo-text h1 {
+  font-size: 1.5rem;
+  color: #D84315;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo-text p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.star-badge {
+  background: linear-gradient(135deg, #FFF8E1, #FFECB3);
+  border: 2px solid #FFD54F;
+  color: #E65100;
+  padding: 6px 14px;
+  border-radius: 50px;
+  font-weight: 800;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: var(--shadow-sm);
+}
+
+.sound-btn {
+  background: #FFFFFF;
+  border: 2px solid #E2E8F0;
+  border-radius: 50px;
+  padding: 8px 14px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #4A5568;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 0 #CBD5E0;
+}
+
+.sound-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 #CBD5E0;
+}
+
+.sound-btn:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 #CBD5E0;
+}
+
+.sound-btn.active {
+  background: #E8F5E9;
+  border-color: #81C784;
+  color: #2E7D32;
+}
+
+/* ================= 模式切換分頁 ================= */
+.mode-nav {
+  width: 100%;
+  max-width: 1120px;
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.tab-btn {
+  flex: 1;
+  background: #FFF;
+  border: 3px solid #E2E8F0;
+  border-radius: 16px;
+  padding: 12px 16px;
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #4A5568;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 6px 0 #CBD5E0;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.tab-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 0 #CBD5E0;
+}
+
+.tab-btn.active {
+  background: linear-gradient(135deg, #FF9800, #F57C00);
+  border-color: #E65100;
+  color: #FFF;
+  box-shadow: 0 6px 0 #BF360C;
+  transform: translateY(2px);
+}
+
+.tab-btn:active {
+  transform: translateY(4px);
+  box-shadow: 0 2px 0 #CBD5E0;
+}
+
+/* ================= 主內容容器 ================= */
+.main-stage {
+  width: 100%;
+  max-width: 1120px;
+  background: var(--panel-bg);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-lg);
+  padding: 24px;
+  min-height: 580px;
+  border: 3px solid #FFF;
+  position: relative;
+  overflow: hidden;
+}
+
+.mode-section {
+  display: none;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.mode-section.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ================= 模式一：積木透視鏡（探索島） ================= */
+.explorer-top-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  background: #F8FAFC;
+  padding: 14px 18px;
+  border-radius: 16px;
+  margin-bottom: 20px;
+  border: 2px dashed #CBD5E0;
+  gap: 12px;
+}
+
+.preset-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.preset-title {
+  font-weight: 800;
+  font-size: 0.95rem;
+  color: #4A5568;
+}
+
+.preset-btn {
+  background: #FFF;
+  border: 2px solid #E2E8F0;
+  border-radius: 20px;
+  padding: 6px 12px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #2D3748;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.preset-btn:hover {
+  background: #FFF3E0;
+  border-color: #FFB74D;
+  color: #E65100;
+}
+
+.number-input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.custom-num-input {
+  width: 110px;
+  padding: 6px 12px;
+  font-size: 1.2rem;
+  font-weight: 800;
+  text-align: center;
+  border: 2px solid #CBD5E0;
+  border-radius: 12px;
+  font-family: inherit;
+  color: #1A202C;
+}
+
+.action-pill-btn {
+  background: #4299E1;
+  color: #FFF;
+  border: none;
+  border-radius: 12px;
+  padding: 8px 14px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  box-shadow: 0 4px 0 #2B6CB0;
+}
+
+.action-pill-btn:hover {
+  background: #3182CE;
+}
+
+.action-pill-btn:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 #2B6CB0;
+}
+
+/* 定位板 (萬 千 百 十 個) */
+.place-value-board {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+  margin-bottom: 20px;
+  background: #FFF;
+  padding: 12px;
+  border-radius: 18px;
+  border: 3px solid #E2E8F0;
+  box-shadow: var(--shadow-sm);
+}
+
+.pv-column {
+  text-align: center;
+  border-radius: 14px;
+  padding: 10px 4px;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+}
+
+.pv-column.col-wan { background: var(--color-wan-bg); border: 2px solid #CE93D8; }
+.pv-column.col-qian { background: var(--color-qian-bg); border: 2px solid #FFCC80; }
+.pv-column.col-bai { background: var(--color-bai-bg); border: 2px solid #90CAF9; }
+.pv-column.col-shi { background: var(--color-shi-bg); border: 2px solid #F48FB1; }
+.pv-column.col-ge { background: var(--color-ge-bg); border: 2px solid #A5D6A7; }
+
+.pv-column.highlight-change {
+  animation: pulse-border 0.6s ease-in-out infinite alternate;
+  transform: scale(1.05);
+  z-index: 2;
+}
+
+@keyframes pulse-border {
+  from { box-shadow: 0 0 0 2px #FF5722; }
+  to { box-shadow: 0 0 16px 4px #FF9800; }
+}
+
+.pv-header {
+  font-size: 0.95rem;
+  font-weight: 800;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.col-wan .pv-header { color: var(--color-wan); }
+.col-qian .pv-header { color: var(--color-qian); }
+.col-bai .pv-header { color: var(--color-bai); }
+.col-shi .pv-header { color: var(--color-shi); }
+.col-ge .pv-header { color: var(--color-ge); }
+
+.pv-digit {
+  font-size: 2.6rem;
+  font-weight: 900;
+  line-height: 1;
+  padding: 4px 0;
+  color: #1A202C;
+  transition: transform 0.2s;
+}
+
+.pv-subtext {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+/* 朗讀與大數字展示條 */
+.current-number-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.big-number-badge {
+  font-size: 2.8rem;
+  font-weight: 900;
+  color: #1A365D;
+  background: #EDF2F7;
+  padding: 4px 28px;
+  border-radius: 50px;
+  border: 3px solid #CBD5E0;
+  letter-spacing: 2px;
+}
+
+.speak-btn {
+  background: #FFF9C4;
+  border: 2px solid #FBC02D;
+  border-radius: 50px;
+  padding: 8px 16px;
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #F57F17;
+  cursor: pointer;
+  box-shadow: 0 4px 0 #FBC02D;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.speak-btn:hover {
+  background: #FFF59D;
+  transform: translateY(-2px);
+}
+
+.speak-btn:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 #FBC02D;
+}
+
+/* 數列增減大按鈕區 */
+.step-control-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.step-card {
+  background: #FFF;
+  border-radius: 16px;
+  padding: 12px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border: 2px solid #E2E8F0;
+}
+
+.step-card.card-qian { border-top: 5px solid var(--color-qian); }
+.step-card.card-bai { border-top: 5px solid var(--color-bai); }
+.step-card.card-shi { border-top: 5px solid var(--color-shi); }
+.step-card.card-ge { border-top: 5px solid var(--color-ge); }
+
+.step-card-title {
+  text-align: center;
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: #718096;
+}
+
+.step-btn-pair {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-step {
+  flex: 1;
+  padding: 10px 4px;
+  font-size: 1.1rem;
+  font-weight: 900;
+  border-radius: 12px;
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+  transition: all 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+}
+
+.btn-step.add {
+  background: #E8F5E9;
+  color: #2E7D32;
+  border: 2px solid #A5D6A7;
+  box-shadow: 0 4px 0 #81C784;
+}
+
+.btn-step.sub {
+  background: #FFEBEE;
+  color: #C62828;
+  border: 2px solid #FFCDD2;
+  box-shadow: 0 4px 0 #E57373;
+}
+
+.btn-step:hover {
+  transform: translateY(-2px);
+}
+
+.btn-step:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 #A0AEC0;
+}
+
+/* 積木具象展示台 (Blocks Stage) */
+.blocks-stage {
+  background: linear-gradient(180deg, #F0F4F8 0%, #E2E8F0 100%);
+  border-radius: 18px;
+  padding: 18px;
+  border: 2px solid #CBD5E0;
+  margin-bottom: 20px;
+  min-height: 220px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  position: relative;
+}
+
+.block-column {
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 14px;
+  padding: 12px 8px;
+  border: 2px solid #FFF;
+  display: flex;
+  flex-direction: column;
+  min-height: 200px;
+}
+
+.block-col-header {
+  font-size: 0.85rem;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 10px;
+  padding-bottom: 4px;
+  border-bottom: 2px dashed rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.block-display-area {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: flex-end;
+  justify-content: center;
+  align-content: flex-end;
+  min-height: 140px;
+  position: relative;
+}
+
+/* 立體積木 CSS/SVG 繪製樣式 */
+/* 千位立體大金塊 (1000) */
+.cube-1000 {
+  width: 52px;
+  height: 52px;
+  background: linear-gradient(135deg, #FFE082 0%, #FFB300 50%, #FFA000 100%);
+  border: 2px solid #E65100;
+  border-radius: 6px;
+  box-shadow: 3px 3px 0 #BF360C, inset 0 0 6px rgba(255, 255, 255, 0.6);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  font-weight: 900;
+  color: #795548;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.cube-1000::before {
+  content: '1000';
+  position: absolute;
+  font-size: 0.6rem;
+  font-weight: 800;
+  color: #4E342E;
+}
+
+/* 百位平板 (100) */
+.flat-100 {
+  width: 44px;
+  height: 44px;
+  background: #E1F5FE;
+  border: 2px solid #0288D1;
+  border-radius: 4px;
+  background-image: 
+    linear-gradient(to right, rgba(2, 136, 209, 0.3) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(2, 136, 209, 0.3) 1px, transparent 1px);
+  background-size: 4.4px 4.4px;
+  box-shadow: 2px 2px 0 #01579B;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.55rem;
+  font-weight: 900;
+  color: #01579B;
+  transition: transform 0.3s;
+}
+
+/* 十位長條 (10) */
+.rod-10 {
+  width: 12px;
+  height: 54px;
+  background: #FCE4EC;
+  border: 2px solid #D81B60;
+  border-radius: 3px;
+  background-image: linear-gradient(to bottom, rgba(216, 27, 96, 0.4) 1px, transparent 1px);
+  background-size: 100% 5.4px;
+  box-shadow: 2px 2px 0 #880E4F;
+  transition: transform 0.3s;
+}
+
+/* 個位小粒 (1) */
+.unit-1 {
+  width: 14px;
+  height: 14px;
+  background: #C8E6C9;
+  border: 2px solid #2E7D32;
+  border-radius: 3px;
+  box-shadow: 1px 1px 0 #1B5E20;
+  transition: transform 0.3s;
+}
+
+.block-pop-in {
+  animation: pop-in 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes pop-in {
+  0% { transform: scale(0); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* 教學講解提示欄 */
+.explanation-banner {
+  background: #FFFDE7;
+  border: 2px solid #FFF59D;
+  border-left: 8px solid #FBC02D;
+  border-radius: 14px;
+  padding: 12px 18px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.mascot-avatar {
+  font-size: 2rem;
+  flex-shrink: 0;
+}
+
+.explanation-text {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #5D4037;
+  line-height: 1.5;
+}
+
+.explanation-text span.highlight {
+  color: #D84315;
+  background: #FFE082;
+  padding: 2px 6px;
+  border-radius: 6px;
+  font-weight: 900;
+}
+
+/* 歷史數列軌道 (History Trail) */
+.history-trail-wrap {
+  background: #FFF;
+  border-radius: 14px;
+  padding: 10px 16px;
+  border: 2px solid #E2E8F0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.trail-title {
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: #718096;
+}
+
+.trail-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.trail-chip {
+  background: #EDF2F7;
+  border: 2px solid #CBD5E0;
+  padding: 4px 12px;
+  border-radius: 50px;
+  font-weight: 800;
+  font-size: 0.95rem;
+  color: #2D3748;
+}
+
+.trail-chip.current {
+  background: #FFF3E0;
+  border-color: #FF9800;
+  color: #E65100;
+  transform: scale(1.05);
+}
+
+.trail-arrow {
+  color: #A0AEC0;
+  font-weight: 800;
+  font-size: 0.85rem;
+}
+
+/* ================= 模式二：數列小火車（關卡闖關） ================= */
+.quest-top-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.level-badges-list {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.level-btn {
+  background: #FFF;
+  border: 2px solid #E2E8F0;
+  border-radius: 14px;
+  padding: 8px 14px;
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #4A5568;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s;
+  box-shadow: 0 4px 0 #CBD5E0;
+}
+
+.level-btn:hover {
+  transform: translateY(-2px);
+}
+
+.level-btn.active {
+  background: linear-gradient(135deg, #FF5722, #E64A19);
+  color: #FFF;
+  border-color: #BF360C;
+  box-shadow: 0 4px 0 #BF360C;
+}
+
+.level-btn.completed {
+  border-color: #81C784;
+}
+
+.level-btn.completed::after {
+  content: ' ⭐';
+}
+
+/* 火車軌道舞台 (Train Track Stage) */
+.train-stage {
+  background: linear-gradient(180deg, #E0F7FA 0%, #FFFDE7 75%, #A5D6A7 75%, #81C784 100%);
+  border-radius: 20px;
+  padding: 30px 20px 20px 20px;
+  border: 3px solid #80DEEA;
+  margin-bottom: 20px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* 軌道木枕 */
+.train-track {
+  position: absolute;
+  bottom: 30px;
+  left: 0;
+  right: 0;
+  height: 12px;
+  background: #795548;
+  border-radius: 6px;
+  box-shadow: 0 4px 0 #4E342E;
+}
+
+.train-track::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 0;
+  right: 0;
+  height: 8px;
+  background-image: repeating-linear-gradient(90deg, #8D6E63, #8D6E63 12px, transparent 12px, transparent 28px);
+}
+
+/* 火車隊伍 */
+.train-convoy {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  margin-bottom: 24px;
+  position: relative;
+  z-index: 2;
+  overflow-x: auto;
+  padding: 10px 4px;
+}
+
+/* 火車頭 */
+.train-engine {
+  width: 110px;
+  height: 90px;
+  background: linear-gradient(135deg, #FF5722, #E64A19);
+  border: 3px solid #BF360C;
+  border-radius: 20px 10px 10px 10px;
+  position: relative;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 0 #BF360C;
+}
+
+.train-chimney {
+  position: absolute;
+  top: -20px;
+  left: 18px;
+  width: 22px;
+  height: 22px;
+  background: #37474F;
+  border: 2px solid #212121;
+  border-radius: 6px 6px 0 0;
+}
+
+.smoke-puff {
+  position: absolute;
+  top: -36px;
+  left: 14px;
+  width: 26px;
+  height: 26px;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 50%;
+  animation: puff-float 2s infinite ease-out;
+}
+
+@keyframes puff-float {
+  0% { transform: translateY(0) scale(0.5); opacity: 0.9; }
+  100% { transform: translateY(-30px) scale(1.6); opacity: 0; }
+}
+
+.engine-face {
+  font-size: 2.2rem;
+}
+
+.engine-title {
+  color: #FFF;
+  font-weight: 900;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+}
+
+.train-wheels {
+  position: absolute;
+  bottom: -12px;
+  left: 8px;
+  right: 8px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.wheel {
+  width: 24px;
+  height: 24px;
+  background: #424242;
+  border: 3px solid #212121;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 3px #BDBDBD;
+  animation: spin-wheel 1s linear infinite;
+}
+
+@keyframes spin-wheel {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* 車廂 */
+.train-car {
+  min-width: 120px;
+  height: 84px;
+  background: #FFF;
+  border: 3px solid #78909C;
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  flex-shrink: 0;
+  box-shadow: 0 6px 0 #546E7A;
+  transition: all 0.3s;
+}
+
+.train-car.question-car {
+  background: linear-gradient(135deg, #FFF9C4, #FFF176);
+  border-color: #FBC02D;
+  box-shadow: 0 6px 0 #F57F17;
+  animation: car-bounce 1s ease-in-out infinite alternate;
+}
+
+@keyframes car-bounce {
+  from { transform: translateY(0); }
+  to { transform: translateY(-6px); }
+}
+
+.car-number {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: #1A365D;
+}
+
+.train-car.question-car .car-number {
+  color: #E65100;
+  font-size: 2rem;
+}
+
+/* 火車朗讀整列數字時的高亮車廂動畫 */
+.train-car.speaking-active {
+  border-color: #FF5722 !important;
+  background: #FFF9C4 !important;
+  box-shadow: 0 0 22px rgba(255, 87, 34, 0.85), 0 8px 0 #BF360C !important;
+  transform: translateY(-10px) scale(1.08) !important;
+  z-index: 10;
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  animation: car-pulse-glow 0.8s ease-in-out infinite alternate !important;
+}
+
+@keyframes car-pulse-glow {
+  0% { box-shadow: 0 0 10px rgba(255, 87, 34, 0.6), 0 6px 0 #BF360C; }
+  100% { box-shadow: 0 0 26px rgba(255, 152, 0, 0.95), 0 10px 0 #BF360C; }
+}
+
+.car-rule-arrow {
+  position: absolute;
+  top: -24px;
+  left: -22px;
+  background: #FF9800;
+  color: #FFF;
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 50px;
+  border: 1px solid #E65100;
+  z-index: 5;
+  white-space: nowrap;
+}
+
+/* 提示與積木透視鏡區域 */
+.quest-hint-box {
+  background: #F1F8E9;
+  border: 3px solid #81C784;
+  border-radius: 18px;
+  padding: 16px 20px;
+  margin-bottom: 20px;
+  display: none;
+  box-shadow: 0 8px 24px rgba(76, 175, 80, 0.12);
+}
+
+.quest-hint-box.show {
+  display: block;
+  animation: fadeIn 0.3s ease-in;
+}
+
+.hint-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 2px dashed #C8E6C9;
+}
+
+.hint-title {
+  font-weight: 900;
+  color: #2E7D32;
+  font-size: 1.15rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hint-content {
+  font-size: 0.95rem;
+  color: #1B5E20;
+  line-height: 1.6;
+}
+
+/* 提示段落標題 */
+.hint-section-title {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #2E7D32;
+  margin: 12px 0 8px 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* 整列 5 節車廂微型積木卡橫向捲軸 */
+.hint-cars-scroll-wrap {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding: 8px 4px 14px 4px;
+  margin-bottom: 8px;
+}
+
+.hint-car-card {
+  min-width: 145px;
+  flex: 1;
+  background: #FFFFFF;
+  border: 2px solid #CBD5E0;
+  border-radius: 14px;
+  padding: 10px 8px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.2s;
+}
+
+.hint-car-card:hover {
+  transform: translateY(-2px);
+}
+
+.hint-car-card.is-target {
+  border: 3px dashed #FF9800;
+  background: #FFFDE7;
+  box-shadow: 0 6px 16px rgba(255, 152, 0, 0.25);
+  animation: target-glow 1.2s ease-in-out infinite alternate;
+}
+
+@keyframes target-glow {
+  from { border-color: #FF9800; box-shadow: 0 0 8px rgba(255, 152, 0, 0.3); }
+  to { border-color: #F57C00; box-shadow: 0 0 16px rgba(255, 152, 0, 0.6); }
+}
+
+.hint-car-badge {
+  font-size: 0.75rem;
+  font-weight: 800;
+  background: #EDF2F7;
+  color: #4A5568;
+  padding: 2px 8px;
+  border-radius: 50px;
+  margin-bottom: 4px;
+}
+
+.hint-car-badge.target-badge {
+  background: #FFE082;
+  color: #E65100;
+  font-weight: 900;
+}
+
+.hint-car-num {
+  font-size: 1.35rem;
+  font-weight: 900;
+  color: #1A365D;
+  margin-bottom: 6px;
+}
+
+.hint-car-num.target-num {
+  color: #E65100;
+}
+
+.hint-car-blocks-list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  background: #F8FAFC;
+  border-radius: 8px;
+  padding: 6px 4px;
+}
+
+.mini-block-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 4px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.mini-block-row.highlight-place {
+  background: #FFF59D;
+  box-shadow: 0 0 0 1.5px #FBC02D;
+  animation: pulse-mini-row 0.8s ease-in-out infinite alternate;
+}
+
+@keyframes pulse-mini-row {
+  from { background: #FFF9C4; }
+  to { background: #FFE082; }
+}
+
+.mini-col-tag {
+  font-size: 0.7rem;
+  font-weight: 800;
+  padding: 1px 4px;
+  border-radius: 4px;
+  min-width: 18px;
+  text-align: center;
+}
+
+.mini-col-tag.qian { background: var(--color-qian-bg); color: var(--color-qian); }
+.mini-col-tag.bai { background: var(--color-bai-bg); color: var(--color-bai); }
+.mini-col-tag.shi { background: var(--color-shi-bg); color: var(--color-shi); }
+.mini-col-tag.ge { background: var(--color-ge-bg); color: var(--color-ge); }
+
+.mini-blocks-pack {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  align-items: center;
+  min-height: 16px;
+}
+
+.mini-count {
+  font-size: 0.7rem;
+  color: #718096;
+  font-weight: 800;
+}
+
+/* 微型積木圖示 */
+.mini-cube-1000 {
+  width: 14px;
+  height: 14px;
+  background: linear-gradient(135deg, #FFE082, #FFA000);
+  border: 1px solid #E65100;
+  border-radius: 2px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.55rem;
+  font-weight: 900;
+  color: #4E342E;
+  box-shadow: 1px 1px 0 #BF360C;
+}
+
+.mini-flat-100 {
+  width: 13px;
+  height: 13px;
+  background: #B3E5FC;
+  border: 1px solid #0288D1;
+  border-radius: 2px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.5rem;
+  font-weight: 900;
+  color: #01579B;
+}
+
+.mini-rod-10 {
+  width: 5px;
+  height: 14px;
+  background: #F8BBD0;
+  border: 1px solid #D81B60;
+  border-radius: 2px;
+  display: inline-block;
+}
+
+.mini-unit-1 {
+  width: 7px;
+  height: 7px;
+  background: #C8E6C9;
+  border: 1px solid #2E7D32;
+  border-radius: 2px;
+  display: inline-block;
+}
+
+.mini-empty-dash {
+  color: #CBD5E0;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+/* 關鍵進退位積木特寫放大鏡對照台 */
+.hint-transform-stage {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 12px;
+  background: #FFFFFF;
+  border: 2px solid #C8E6C9;
+  border-radius: 16px;
+  padding: 14px;
+  margin-top: 6px;
+  box-shadow: var(--shadow-sm);
+}
+
+.hint-stage-box {
+  background: #F8FAFC;
+  border: 2px solid #E2E8F0;
+  border-radius: 12px;
+  padding: 10px;
+}
+
+.hint-stage-box.target-box {
+  background: #FFFDE7;
+  border: 2px solid #FFD54F;
+}
+
+.hint-box-title {
+  font-size: 0.95rem;
+  font-weight: 800;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.hint-block-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+}
+
+.hint-col-box {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 8px;
+  padding: 6px 2px;
+  text-align: center;
+  border: 1px solid #E2E8F0;
+  display: flex;
+  flex-direction: column;
+}
+
+.hint-col-box.place-pulse {
+  border: 2px solid #FF9800;
+  background: #FFF9C4;
+  box-shadow: 0 0 10px rgba(255, 152, 0, 0.4);
+}
+
+.hint-col-title {
+  font-size: 0.72rem;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+
+.hint-col-cubes {
+  min-height: 48px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 2px;
+}
+
+.hint-stage-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 0 4px;
+}
+
+.hint-rule-pill {
+  padding: 6px 14px;
+  border-radius: 50px;
+  font-weight: 900;
+  font-size: 1.1rem;
+  color: #FFF;
+  box-shadow: 0 3px 0 rgba(0,0,0,0.15);
+}
+
+.hint-rule-pill.rule-add {
+  background: #4CAF50;
+}
+
+.hint-rule-pill.rule-sub {
+  background: #E53935;
+}
+
+.hint-arrow-icon {
+  font-size: 1.5rem;
+  color: #FF9800;
+  font-weight: 900;
+}
+
+.hint-rule-subtext {
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: #4A5568;
+}
+
+.hint-summary-banner {
+  background: #E8F5E9;
+  border-radius: 10px;
+  padding: 10px 14px;
+  margin-top: 12px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #1B5E20;
+  border-left: 5px solid #4CAF50;
+  line-height: 1.5;
+}
+
+/* 作答控制台 */
+.quest-action-console {
+  background: #F8FAFC;
+  border: 2px solid #E2E8F0;
+  border-radius: 18px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.question-prompt-banner {
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: 900;
+  color: #2D3748;
+}
+
+.options-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+.option-btn {
+  background: #FFF;
+  border: 3px solid #CBD5E0;
+  border-radius: 16px;
+  padding: 16px 20px;
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: #2B6CB0;
+  cursor: pointer;
+  box-shadow: 0 6px 0 #CBD5E0;
+  transition: all 0.15s ease;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.option-btn:hover {
+  border-color: #4299E1;
+  background: #EBF8FF;
+  transform: translateY(-3px);
+  box-shadow: 0 9px 0 #CBD5E0;
+}
+
+.option-btn:active {
+  transform: translateY(3px);
+  box-shadow: 0 2px 0 #CBD5E0;
+}
+
+.option-btn.correct {
+  background: #C8E6C9 !important;
+  border-color: #4CAF50 !important;
+  color: #1B5E20 !important;
+  box-shadow: 0 4px 0 #2E7D32 !important;
+}
+
+.option-btn.wrong {
+  background: #FFCDD2 !important;
+  border-color: #E53935 !important;
+  color: #B71C1C !important;
+  animation: shake 0.4s ease-in-out;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-8px); }
+  50% { transform: translateX(8px); }
+  75% { transform: translateX(-6px); }
+}
+
+.helper-btn-row {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+.tool-toggle-btn {
+  background: #FFF;
+  border: 2px solid #E2E8F0;
+  border-radius: 50px;
+  padding: 8px 20px;
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #4A5568;
+  cursor: pointer;
+  box-shadow: 0 4px 0 #CBD5E0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.tool-toggle-btn:hover {
+  background: #F7FAFC;
+}
+
+/* ================= 模式三：進退位魔術箱（靶向特訓） ================= */
+.magic-stage {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.magic-cases-selector {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 6px;
+}
+
+.case-chip {
+  background: #FFF;
+  border: 2px solid #E2E8F0;
+  border-radius: 12px;
+  padding: 8px 14px;
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: #4A5568;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+
+.case-chip.active {
+  background: #9C27B0;
+  color: #FFF;
+  border-color: #6A1B9A;
+  box-shadow: 0 4px 0 #4A148C;
+}
+
+.magic-box-arena {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 20px;
+  background: #FAF5FF;
+  border: 3px solid #E9D8FD;
+  border-radius: 20px;
+  padding: 24px;
+}
+
+.magic-box-col {
+  background: #FFF;
+  border-radius: 16px;
+  padding: 16px;
+  border: 2px solid #D6BCFA;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 240px;
+}
+
+.magic-box-title {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #6B46C1;
+  margin-bottom: 12px;
+}
+
+.magic-box-number {
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: #1A365D;
+  margin-bottom: 12px;
+}
+
+.magic-action-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.magic-wand-btn {
+  background: linear-gradient(135deg, #AB47BC, #7B1FA2);
+  color: #FFF;
+  border: none;
+  border-radius: 50px;
+  padding: 14px 24px;
+  font-size: 1.15rem;
+  font-weight: 900;
+  cursor: pointer;
+  box-shadow: 0 6px 0 #4A148C;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+
+.magic-wand-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 0 #4A148C;
+}
+
+.magic-wand-btn:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 #4A148C;
+}
+
+/* ================= 彈窗與慶祝動畫 (Celebration Modal) ================= */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-overlay.show {
+  display: flex;
+  animation: fadeIn 0.3s ease;
+}
+
+.modal-dialog {
+  background: #FFF;
+  border-radius: 28px;
+  padding: 32px;
+  max-width: 480px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  border: 4px solid #FFD54F;
+  animation: pop-in 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.modal-icon {
+  font-size: 4rem;
+  margin-bottom: 12px;
+  animation: train-rock 1s ease-in-out infinite alternate;
+}
+
+.modal-title {
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: #E65100;
+  margin-bottom: 8px;
+}
+
+.modal-body {
+  font-size: 1.1rem;
+  color: #4A5568;
+  margin-bottom: 24px;
+  line-height: 1.6;
+}
+
+.modal-close-btn {
+  background: linear-gradient(135deg, #FF9800, #F57C00);
+  color: #FFF;
+  border: none;
+  border-radius: 50px;
+  padding: 12px 36px;
+  font-size: 1.2rem;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 6px 0 #E65100;
+  font-family: inherit;
+}
+
+.modal-close-btn:hover {
+  transform: translateY(-2px);
+}
+
+.modal-close-btn:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 #E65100;
+}
+
+/* ================= 響應式微調 (RWD) ================= */
+@media (max-width: 820px) {
+  .place-value-board {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 4px;
+  }
+  .pv-digit {
+    font-size: 1.8rem;
+  }
+  .step-control-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .blocks-stage {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .options-grid {
+    grid-template-columns: 1fr;
+  }
+  .magic-box-arena {
+    grid-template-columns: 1fr;
+  }
+  .hint-transform-stage {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .hint-stage-center {
+    flex-direction: row;
+    justify-content: center;
+  }
+  .hint-arrow-icon {
+    transform: rotate(90deg);
+  }
+}
